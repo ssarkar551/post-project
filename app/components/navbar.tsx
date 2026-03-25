@@ -11,12 +11,14 @@ export default function Navbar() {
                 <SideNav/>
             </div>
 			<div>
+				<Link href="/">
 				<Image
 					src="/logo.webp"
 					width={80}
 					height={80}
 					className="hidden md:block border rounded-full"
 					alt="Post Project Logo"
+					priority
 				/>
 				<Image
 					src="/logo.webp"
@@ -24,9 +26,16 @@ export default function Navbar() {
 					height={40}
 					className="block md:hidden border rounded-full"
 					alt="Post Project Logo"
+					priority
 				/>
+				</Link>
 			</div>
 			<ul className="hidden md:flex justify-between gap-4 items-center ">
+				<Link href="/category">
+					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="stickers">
+						Categories
+					</li>
+				</Link>
 				<Link href="/category/sticker">
 					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="stickers">
 						Stickers
