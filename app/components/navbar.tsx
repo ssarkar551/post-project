@@ -6,7 +6,7 @@ import SideNav from "./sidenav";
 
 export default function Navbar() {
 	return (
-		<nav className="sticky flex justify-between md:justify-around m-2 p-2 md:shadow-md shadow-blue-400">
+		<nav className="sticky z-50 flex justify-between md:justify-around m-2 p-2 md:shadow-md shadow-blue-400">
             <div className="md:hidden block">
                 <SideNav/>
             </div>
