@@ -1,8 +1,18 @@
+"use client"
 import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Searchwrapper from "./searchwrapper";
 import SideNav from "./sidenav";
+import { NavItemProps } from "../lib/definition";
+import { NavItem } from "./navitem";
+
+const NAV_LINKS: NavItemProps[] = [
+	{ href: "/category", label: "Categories" },
+	{ href: "/category/sticker", label: "Stickers" },
+	{ href: "/category/postcard", label: "Postcards" },
+	{ href: "/category/collections", label: "Collections" },
+];
 
 export default function Navbar() {
 	return (
@@ -31,26 +41,9 @@ export default function Navbar() {
 				</Link>
 			</div>
 			<ul className="hidden md:flex justify-between gap-4 items-center ">
-				<Link href="/category">
-					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="stickers">
-						Categories
-					</li>
-				</Link>
-				<Link href="/category/sticker">
-					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="stickers">
-						Stickers
-					</li>
-				</Link>
-				<Link href="/category/postcard">
-					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="postcards">
-						Postcards
-					</li>
-				</Link>
-                <Link href="/category/collections">
-					<li className="cursor-pointer hover:text-blue-700 md:text-xl" aria-label="collections">
-						Collections
-					</li>
-				</Link>
+				{NAV_LINKS.map((link) => (
+					<NavItem key={link.href} label={link.label} href={link.href}/>
+				))}
 			</ul>
 			<div className="flex justify-between items-center gap-4">
 				<Searchwrapper />

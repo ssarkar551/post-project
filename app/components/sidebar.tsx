@@ -21,6 +21,7 @@ export default function SideBar() {
 	const activeSort = searchParams.get("sort");
 
 	return (
+		
 		<div>
 			{/* Mobile button */}
 			<button className="md:hidden w-6" onClick={toggleOpen}>

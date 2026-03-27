@@ -13,3 +13,9 @@ export type ProductGridProps = {
     category: string;
     filters: string;
 };
+
+export type NavItemProps = {
+    label: string;
+    href: string;
+    onClick?: () => void;
+} 

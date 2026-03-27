@@ -1,27 +1,42 @@
 "use client";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { NavItem } from "./navitem";
+import { NavItemProps } from "../lib/definition";
+
+const NAV_LINKS: NavItemProps[] = [
+	{ href: "/category", label: "Categories" },
+	{ href: "/category/sticker", label: "Stickers" },
+	{ href: "/category/postcard", label: "Postcards" },
+	{ href: "/category/collections", label: "Collections" },
+];
 
 export default function SideNav() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 	const toggleOpen = () => {
-		console.log("inside hamburger");
 		setIsMenuOpen((prev) => !prev);
 	};
+
+	useEffect(() => {
+		document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+	}, [isMenuOpen]);
+
 	return (
 		<div className="flex flex-col items-center md:hidden">
-			<button className="flex items-center justify-center mt-2">
-				<Bars3Icon
-					className="w-5"
-					onClick={(e) => {
-						e.stopPropagation();
-						toggleOpen();
-					}}
-				/>
+			<button
+				className="flex items-center justify-center mt-2"
+				onClick={(e) => {
+					e.stopPropagation();
+					toggleOpen();
+				}}
+				aria-label="open menu"
+				aria-expanded={isMenuOpen}
+			>
+				<Bars3Icon className="w-5" />
 			</button>
 			<div
-				className={`fixed inset-0 z-50 transition-opacity duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+				className={`fixed inset-0 z-50 transition-opacity duration-400 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
 			>
 				<div
 					className="absolute inset-0 bg-black/70 backdrop-blur-sm"
@@ -34,21 +49,9 @@ export default function SideNav() {
 						<XMarkIcon className="w-5 cursor-pointer focus:text-blue-700" />
 					</button>
 					<ul className="flex flex-col justify-between gap-4 items-center ">
-						<Link href="/category/sticker">
-							<li className="cursor-pointer focus:text-blue-700 md:text-xl">
-								Stickers
-							</li>
-						</Link>
-						<Link href="/category/postcard">
-							<li className="cursor-pointer focus:text-blue-700 md:text-xl">
-								Postcards
-							</li>
-						</Link>
-						<Link href="/category/collections">
-							<li className="cursor-pointer focus:text-blue-700 md:text-xl">
-								Collections
-							</li>
-						</Link>
+						{NAV_LINKS.map((link) => (
+							<NavItem key ={link.href} label={link.label} href={link.href} onClick={toggleOpen}/>
+						))}
 					</ul>
 				</div>
 			</div>
