@@ -69,7 +69,7 @@ export default function Navbar() {
 
 				{/* Desktop nav links */}
 				<ul
-					className="hidden md:flex items-center gap-1"
+					className="hidden md:flex items-center gap-2"
 					role="list"
 				>
 					{NAV_LINKS.map((link) => (
@@ -131,7 +131,7 @@ export default function Navbar() {
 					fixed top-0 left-0 h-full w-72 z-50
 					bg-white shadow-2xl
 					flex flex-col
-					transform transition-transform duration-300 ease-in-out
+					transform transition-transform duration-400 ease-in-out
 					md:hidden
 					${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
 				`}
@@ -166,21 +166,7 @@ export default function Navbar() {
 				{/* Menu links */}
 				<ul className="flex flex-col py-4 px-3 gap-1 flex-1" role="list">
 					{NAV_LINKS.map((link) => (
-						<li key={link.href}>
-							<Link
-								href={link.href}
-								onClick={closeMenu}
-								className="
-									flex items-center px-4 py-3 rounded-lg
-									text-gray-700 font-medium
-									hover:text-blue-600 hover:bg-blue-50
-									transition-colors duration-150
-									focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
-								"
-							>
-								{link.label}
-							</Link>
-						</li>
+						<NavItem key={link.href} label={link.label} href={link.href} onClick={closeMenu}/>
 					))}
 				</ul>
 
