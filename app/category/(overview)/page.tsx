@@ -1,9 +1,11 @@
 
+import ProductGrid from "@/app/components/productgrid";
 
-export default function Page(){
+export default async function Page({searchParams}: {searchParams: string}) {
+    
     return (
-        <main>
-            <h1>Categories</h1>
-        </main>
+        <div className="flex flex-around">
+            <ProductGrid category="" filters={searchParams}/>
+        </div>
     )
 }

@@ -7,4 +7,9 @@ export type Product = {
     alt: string;
     original_price?: number;
     on_sale?: boolean;
-}
+};
+
+export type ProductGridProps = {
+    category: string;
+    filters: string;
+};
