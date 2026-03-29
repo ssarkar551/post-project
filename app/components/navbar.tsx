@@ -25,7 +25,7 @@ export default function Navbar() {
 	const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 	const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
 
-	const quantity = useAppSelector((state) => state.cart.items.length);
+	const quantity = useAppSelector((state) => state.cart.items.reduce((total, item) => total + item.quantity, 0));
 
 	// Lock body scroll when mobile menu is open
 	useEffect(() => {
@@ -92,7 +92,7 @@ export default function Navbar() {
 					<Link
 						href="/cart"
 						className="
-							relative p-2 rounded-full
+							relative inline-flex p-2 rounded-full
 							text-gray-600 hover:text-blue-600 hover:bg-blue-50
 							transition-colors duration-200
 							focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
@@ -100,6 +100,7 @@ export default function Navbar() {
 						aria-label="Shopping cart"
 					>
 						<ShoppingCartIcon className="w-5 h-5 md:w-6 md:h-6" />
+						<span className="absolute top-0.5 right-0.5 grid translate-x-2/4 translate-y-1/2 place-items-center rounded-full">{quantity}</span>
 					</Link>
 
 					{/* Mobile menu toggle */}

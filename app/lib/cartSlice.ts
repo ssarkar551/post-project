@@ -17,7 +17,6 @@ const cartSlice = createSlice({
             } else {
                 state.items.push(action.payload)
             }
-            state.items.push(action.payload);
         },
         deleteItem: (state, action: PayloadAction<string>) => {
             const item = state.items.find((i) => i.id === action.payload);
