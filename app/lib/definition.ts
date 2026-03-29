@@ -18,4 +18,15 @@ export type NavItemProps = {
     label: string;
     href: string;
     onClick?: () => void;
-} 
+};
+
+export type CartItem = {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+};
+
+export type CartState = {
+    items: CartItem[];
+};

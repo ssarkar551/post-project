@@ -1,11 +1,16 @@
 "use client";
 import Image from "next/image";
-import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+	Bars3Icon,
+	ShoppingCartIcon,
+	XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Searchwrapper from "./searchwrapper";
 import { NavItemProps } from "../lib/definition";
 import { NavItem } from "./navitem";
 import { useEffect, useState, useCallback } from "react";
+import { useAppSelector } from "../lib/hooks";
 
 const NAV_LINKS: NavItemProps[] = [
 	{ href: "/category", label: "Categories" },
@@ -19,6 +24,8 @@ export default function Navbar() {
 
 	const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 	const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
+
+	const quantity = useAppSelector((state) => state.cart.items.length);
 
 	// Lock body scroll when mobile menu is open
 	useEffect(() => {
@@ -68,12 +75,13 @@ export default function Navbar() {
 				</Link>
 
 				{/* Desktop nav links */}
-				<ul
-					className="hidden md:flex items-center gap-2"
-					role="list"
-				>
+				<ul className="hidden md:flex items-center gap-2" role="list">
 					{NAV_LINKS.map((link) => (
-						<NavItem key={link.href} label={link.label} href={link.href} />
+						<NavItem
+							key={link.href}
+							label={link.label}
+							href={link.href}
+						/>
 					))}
 				</ul>
 
@@ -107,10 +115,11 @@ export default function Navbar() {
 						aria-expanded={isMenuOpen}
 						aria-controls="mobile-menu"
 					>
-						{isMenuOpen
-							? <XMarkIcon className="w-5 h-5" />
-							: <Bars3Icon className="w-5 h-5" />
-						}
+						{isMenuOpen ? (
+							<XMarkIcon className="w-5 h-5" />
+						) : (
+							<Bars3Icon className="w-5 h-5" />
+						)}
 					</button>
 				</div>
 			</nav>
@@ -140,7 +149,11 @@ export default function Navbar() {
 			>
 				{/* Menu header */}
 				<div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-					<Link href="/" onClick={closeMenu} aria-label="Go to homepage">
+					<Link
+						href="/"
+						onClick={closeMenu}
+						aria-label="Go to homepage"
+					>
 						<Image
 							src="/logo.webp"
 							width={40}
@@ -164,9 +177,17 @@ export default function Navbar() {
 				</div>
 
 				{/* Menu links */}
-				<ul className="flex flex-col py-4 px-3 gap-1 flex-1" role="list">
+				<ul
+					className="flex flex-col py-4 px-3 gap-1 flex-1"
+					role="list"
+				>
 					{NAV_LINKS.map((link) => (
-						<NavItem key={link.href} label={link.label} href={link.href} onClick={closeMenu}/>
+						<NavItem
+							key={link.href}
+							label={link.label}
+							href={link.href}
+							onClick={closeMenu}
+						/>
 					))}
 				</ul>
 

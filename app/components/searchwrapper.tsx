@@ -47,7 +47,7 @@ const Searchwrapper = () => {
 			/>
 			<button>
 				<MagnifyingGlassIcon
-					className="w-5 md:w-8 hover:text-blue-700 cursor-pointer"
+					className="w-5 md:w-8 hover:text-blue-700 hover:bg-blue-50 cursor-pointer"
 					onClick={toggleOpen}
                     aria-label="open search"
 				/>
