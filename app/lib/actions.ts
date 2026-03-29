@@ -9,7 +9,7 @@ const _getProducts = async (category?: string, filter?: string) => {
 	try {
 		const data = await sql<
 			Product[]
-		>`SELECT * FROM products WHERE name ILIKE ${"%" + (category ?? "") + "%"} `;
+		>`SELECT * FROM products WHERE name ILIKE ${`%${category ?? ""}%`} `;
 		return data;
 	} catch (e) {
 		console.error("fethching products failed: ", e);
@@ -17,11 +17,30 @@ const _getProducts = async (category?: string, filter?: string) => {
 	}
 };
 
-const getProductsCached = unstable_cache(_getProducts, ["products"], {
-	revalidate: 300,
-	tags: ["products"],
-});
+
 
 export async function getProducts(category?: string, filter?: string) {
-	return getProductsCached(category, filter);
+	return unstable_cache(
+        () => _getProducts(category, filter),
+        ["products", category ?? "", filter ?? ""],
+        {
+            revalidate: 300,
+            tags: ["products"]
+        }
+    )();
+};
+
+export async function getProductsByIds(ids: string[]){
+    if(ids.length === 0)
+        return [];
+
+    const cachedFn = unstable_cache(
+        async () => {
+            return await sql<Product[]>`SELECT * FROM products where id = ANY(${ids})`;
+        },
+        ["products-by-ids", ...ids],
+        {revalidate: 300}
+    );
+    return cachedFn();
+    
 }

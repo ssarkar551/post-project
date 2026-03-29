@@ -25,6 +25,9 @@ export default function ProductCard({ data }: { data: Product }) {
 				id: data.id,
 				name: data.name,
 				price: data.price,
+				image_url: data.image_url,
+				alt: data.alt,
+				url: data.url,
 				quantity: 1,
 			}),
 		);
@@ -59,7 +62,7 @@ export default function ProductCard({ data }: { data: Product }) {
 			</Link>
 			{quantity > 0 ? (
 				<div
-					className="flex justify-between items-center cursor-pointer w-20 md:w-full px-4 py-1.5 rounded-3xl
+					className="flex justify-between items-center cursor-pointer w-full px-4 py-1.5 rounded-3xl
 							bg-gray-200 text-blue-700 border-2 border-blue-700 
 							focus:text-white focus:bg-blue-700"
 				>

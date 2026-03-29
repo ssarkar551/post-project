@@ -24,9 +24,16 @@ export type CartItem = {
     id: string;
     name: string;
     price: number;
+    url: string;
+    image_url: string;
+    alt: string;
     quantity: number;
 };
 
 export type CartState = {
     items: CartItem[];
 };
+
+export type CartProduct = Product & {
+    quantity: number;
+}
