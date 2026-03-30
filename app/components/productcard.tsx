@@ -25,9 +25,10 @@ export default function ProductCard({ data }: { data: Product }) {
 				id: data.id,
 				name: data.name,
 				price: data.price,
-				image_url: data.image_url,
-				alt: data.alt,
+				original_price: data.original_price,
 				url: data.url,
+				alt: data.alt,
+				image_url: data.image_url,
 				quantity: 1,
 			}),
 		);
